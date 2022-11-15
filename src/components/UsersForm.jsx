@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const UsersForm = ({ get, usersSelected, deselect, select }) => {
+const UsersForm = ({
+  get,
+  usersSelected,
+  deselect,
+  select,
+  setVisibility,
+  visibility,
+}) => {
   const initialValues = {
     email: "",
     password: "",
@@ -15,6 +22,7 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
 
   useEffect(() => {
     if (usersSelected) {
+      setVisibility(true);
       reset(usersSelected);
     } else {
       reset(initialValues);
@@ -54,15 +62,7 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
   };
   return (
     <div>
-      <fieldset>
-        <legend>
-          <i
-            style={{ color: "#FF6F91" }}
-            className="fa-solid fa-users fa-2x"
-          ></i>{" "}
-          <span className="x">{usersSelected ? "Edit " : " Create User"}</span>
-        </legend>
-
+      <div className="container" id={visibility ? "form-flex2" : "form-none2"}>
         <form className="form" onSubmit={handleSubmit(submit)}>
           <div className="input-container">
             <label htmlFor="first_name">
@@ -73,9 +73,13 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
               ></i>{" "}
               Name
             </label>
-            <input {...register("first_name")} type="text" id="first_name" />
+            <input
+              {...register("first_name")}
+              type="text"
+              id="first_name"
+              placeholder="first name"
+            />
           </div>
-
           <div className="input-container">
             <label htmlFor="last_name">
               {" "}
@@ -85,9 +89,13 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
               ></i>{" "}
               Last Name
             </label>
-            <input {...register("last_name")} type="text" id="last_name" />
+            <input
+              {...register("last_name")}
+              type="text"
+              id="last_name"
+              placeholder="last name"
+            />
           </div>
-
           <div className="input-container">
             <label htmlFor="email">
               {" "}
@@ -97,9 +105,13 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
               ></i>{" "}
               Email
             </label>
-            <input {...register("email")} type="text" id="email" />
+            <input
+              {...register("email")}
+              type="text"
+              id="email"
+              placeholder="email@address.com"
+            />
           </div>
-
           <div className="input-container">
             <label htmlFor="password">
               {" "}
@@ -109,7 +121,12 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
               ></i>{" "}
               Password
             </label>
-            <input {...register("password")} type="password" id="password" />
+            <input
+              {...register("password")}
+              type="password"
+              id="password"
+              placeholder="password"
+            />
           </div>
           <div className="input-container">
             <label htmlFor="birthday">
@@ -122,13 +139,16 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
             </label>
             <input {...register("birthday")} type="date" id="birthday" />
           </div>
-          <button onClick={showAlert} className="btn">
-            <i
-              style={{ color: "#FF6F91" }}
-              className="fa-solid fa-floppy-disk"
-            ></i>{" "}
-            Submit
-          </button>
+          <button
+            style={{ color: "#FF6F91" }}
+            onClick={() => {
+              showAlert();
+              setVisibility(false);
+            }}
+            className="btn"
+          >
+            <i className="fa-solid fa-floppy-disk"></i> Submit
+          </button>{" "}
           {usersSelected && (
             <button
               style={{ color: "#FF6F91" }}
@@ -138,8 +158,18 @@ const UsersForm = ({ get, usersSelected, deselect, select }) => {
               <i className="fa-solid fa-square-xmark"></i> Cancel
             </button>
           )}
+          <button
+            onClick={() => {
+              setVisibility(false);
+            }}
+            type="button"
+            className="close"
+            style={{ color: "#FF6F91" }}
+          >
+            <i className="fa-solid fa-xmark icon"></i>
+          </button>
         </form>
-      </fieldset>
+      </div>
     </div>
   );
 };

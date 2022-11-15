@@ -8,6 +8,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [usersSelected, setUsersSelected] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [visibility, setVisibility] = useState(true);
   useEffect(() => {
     axios
       .get(`https://users-crud1.herokuapp.com/users/`)
@@ -46,11 +47,23 @@ function App() {
     </div>
   ) : (
     <div className="App">
+      <button
+        className="button-user"
+        onClick={() => {
+          deselect();
+          setVisibility(true);
+        }}
+      >
+        <i className="fa-solid fa-users "></i> Users
+      </button>
       <UsersForm
+        id={visibility ? "form-flex" : "form-none"}
         get={get}
         usersSelected={usersSelected}
         deselect={deselect}
         select={select}
+        setVisibility={setVisibility}
+        visibility={visibility}
       />
       <UsersList users={users} select={select} deleteUsers={deleteUsers} />
     </div>

@@ -11,12 +11,26 @@ body {
 
 .App {
   text-align: center;
-  padding: 70px;
+  padding: 1rem;
   display: inline-block;
   background-color: hwb(60 86% 4%);
+  width: 100%;
+  height: 100%;
 }
 li {
   list-style: none;
+}
+.container {
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fadbd8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .form {
   display: grid;
@@ -59,6 +73,7 @@ li {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
+  padding: 1rem;
 }
 
 .list {
@@ -68,13 +83,37 @@ li {
   font-size: 20px;
   background-color: #ffe3eb;
 }
-.x {
-  font-size: 48px;
+
+#form-none {
+  display: none;
 }
-fieldset {
-  border: solid 1px black;
-  border-radius: 10px 10px;
+#form-flex {
+  display: flex;
 }
+#form-none2 {
+  display: none;
+}
+
+#form-flex2 {
+  display: flex;
+}
+.button-user {
+  width: 200px;
+  height: 70px;
+  color: #ff6f91;
+  font-size: 30px;
+}
+
+.close {
+  width: 50px;
+  height: 50px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+}
+
 @media screen and (max-width: 700px) {
   .App {
     padding: 1rem;
